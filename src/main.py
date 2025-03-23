@@ -9,8 +9,8 @@ app = FastAPI()
 
 
 @app.get("/messages", tags=['Messages'])
-async def get_messages():
-    return sms_controller.get_messages('all')
+async def get_messages(folder="all"):
+    return sms_controller.get_messages(folder)
 
 
 def main():
