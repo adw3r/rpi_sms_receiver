@@ -13,6 +13,7 @@ class SmsController:
         self.com_port.write((command + "\r\n").encode())
         time.sleep(delay)
         response = self.com_port.read(self.com_port.inWaiting()).decode()
+        logger.info(response)
         return response
 
     def get_messages(self, folder='all'):
