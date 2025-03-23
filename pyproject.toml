@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi[all]>=0.115.11",
+    "loguru>=0.7.3",
     "pyserial>=3.5",
     "python-dotenv>=1.0.1",
 ]
