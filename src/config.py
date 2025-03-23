@@ -21,7 +21,7 @@ APP_HOST = os.environ['APP_HOST']
 
 # logging
 logger.remove()
-logging.disable()
+# logging.disable()
 LOGGING_FORMAT = (
     "<level>{time:YYYY-MM-DD HH:mm:ss.SSS}</level> "
     "<level>{level}</level>: "
