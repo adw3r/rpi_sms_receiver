@@ -1,4 +1,5 @@
 import uvicorn
+from fastapi.responses import RedirectResponse
 from fastapi import FastAPI
 
 from src import config, controllers
@@ -6,6 +7,12 @@ from src import config, controllers
 sms_controller = controllers.SmsController()
 
 app = FastAPI()
+
+
+@app.get('/')
+async def root():
+    return RedirectResponse('/docs')
+
 
 
 @app.get("/messages", tags=['Messages'])
