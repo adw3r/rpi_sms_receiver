@@ -21,4 +21,4 @@ class SmsController:
 
         :return:
         """
-        self._send_at(f'at+cmgl={folder}'.upper(), .5)
+        self._send_at(f'at+cmgl="{folder}"'.upper(), .5)
