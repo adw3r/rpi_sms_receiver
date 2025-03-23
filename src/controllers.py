@@ -8,6 +8,9 @@ from src.config import logger
 class SmsController:
     com_port = serial.Serial(config.SIM_SOCKET, baudrate=config.BAUDRATE, timeout=1)
 
+    def __init__(self):
+        self._send_at('at+cmgf=1')
+
     def _send_at(self, command, delay=1):
         logger.info(f'{command = }')
         self.com_port.write((command + "\r\n").encode())
