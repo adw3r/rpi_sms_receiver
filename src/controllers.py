@@ -12,7 +12,7 @@ class SmsController:
         logger.info(f'{command = }')
         self.com_port.write((command + "\r\n").encode())
         time.sleep(delay)
-        response = self.com_port.read(self.com_port.inWaiting()).decode()
+        response = self.com_port.readall()
         logger.info(response)
         return response
 
