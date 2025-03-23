@@ -10,7 +10,7 @@ class SmsController:
     def _send_at(self, command, delay=1):
         self.com_port.write((command + "\r\n").encode())
         time.sleep(delay)
-        response = self.com_port.read(self.com_port.inWaiting()).decode(errors='ignore')
+        response = self.com_port.read(self.com_port.inWaiting()).decode()
         return response
 
     def get_messages(self, folder='all'):
@@ -19,4 +19,4 @@ class SmsController:
 
         :return:
         """
-        self._send_at(f'at+cmgl={folder}', .5)
+        self._send_at(f'at+cmgl={folder}'.upper(), .5)
