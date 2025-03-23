@@ -11,5 +11,5 @@ BAUDRATE = os.environ['BAUDRATE']
 
 
 # fastapi config
-APP_PORT = os.environ['APP_PORT']
+APP_PORT = int(os.environ['APP_PORT'])
 APP_HOST = os.environ['APP_HOST']
