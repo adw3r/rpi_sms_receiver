@@ -19,12 +19,12 @@ async def get_messages(folder="all"):
     return sms_controller.get_messages(folder)
 
 
-@app.get('/messages/{message_id}')
+@app.get('/messages/{message_id}', tags=["Messages"])
 async def get_specific_message(message_id: str | int):
     return sms_controller.get_specific_message(message_id)
 
 
-@app.delete('/messages/{message_id}')
+@app.delete('/messages/{message_id}', tags=["Messages"])
 async def delete_specific_message(message_id: str | int):
     return sms_controller.delete_specific_message(message_id)
 
