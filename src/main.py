@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, Response
 
 from src import config, controllers, serializers
 
@@ -23,8 +23,13 @@ async def get_messages(folder="all"):
 
 @app.get('/messages/{message_id}', tags=["Messages"])
 async def get_specific_message(message_id: str | int):
-    raw_message = sms_controller.get_specific_message(message_id)
-    return serializers.serialize_single_message(raw_message)
+    try:
+        raw_message = sms_controller.get_specific_message(message_id)
+        return serializers.serialize_single_message(raw_message)
+    except Exception as error:
+        from src.config import logger
+        logger.error(error)
+        return Response(status_code=500, content='error')
 
 
 @app.delete('/messages/{message_id}', tags=["Messages"])
