@@ -1,18 +1,26 @@
 from src.config import logger
 
 def __reformat_message(row: str) -> dict:
+    data: dict = {}
     try:
 
         row_splitted = row.split(",", 4)
 
         received_at, raw_message = row_splitted[-1].split("\r\n")
+
         data = {
             "id": row_splitted[0].replace("+CMGL: ", ''),
             "folder": row_splitted[1].replace('"', ""),
             "sent_by": row_splitted[2].replace('"', ""),
             "received_at": received_at.replace('"', ""),
-            "message": raw_message,
+            "raw_message": raw_message,
         }
+        try:
+            byte_data = bytes.fromhex(raw_message)
+            decoded_text = byte_data.decode("utf-16BE")
+            data["message_decoded"] = decoded_text
+        except Exception as error:
+            logger.error(error)
         return data
     except Exception as error:
         logger.exception(error)
@@ -77,6 +85,14 @@ def serialize_single_message(data: str):
     message['folder'] = data[0].replace('+CMGR: ', '')
     message['sent_by'] = data[1]
     message['received_at'] = data[-1].split('\r\n')[0]
-    message['message'] = data[-1].split('\r\n')[1]
+    encoded = data[-1].split('\r\n')[1]
+    message['raw_message'] = encoded
+
+    try:
+        byte_data = bytes.fromhex(encoded)
+        decoded_text = byte_data.decode("utf-16BE")
+        message['message_decoded'] = decoded_text
+    except Exception as error:
+        logger.error(error)
 
     return message

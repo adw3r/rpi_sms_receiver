@@ -1,3 +1,5 @@
+import httpx
+
 from src import serializers
 
 
@@ -8,7 +10,7 @@ def test_serializers():
     assert serialized_answer[0]['id'] == '1'
     assert serialized_answer[0]['sent_by'] == '+380505718633'
     assert serialized_answer[0]['received_at'] == '25/03/:37+08'
-    assert serialized_answer[0]['message'] == 'test'
+    assert serialized_answer[0]['raw_message'] == 'test'
 
 
 def test_single_message():
@@ -19,4 +21,10 @@ def test_single_message():
     assert answer['id'] == '1'
     assert answer['sent_by'] == '+380505718633'
     assert answer['received_at'] == '25/03/23'
-    assert answer['message'] == 'test'
+    assert answer['raw_message'] == 'test'
+
+def test_decode_message_body():
+    data = httpx.get('http://alex-desktop.netis.cc:8081/messages/2')
+    data = data.json()
+
+    print(data)
