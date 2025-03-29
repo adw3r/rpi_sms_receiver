@@ -6,7 +6,7 @@ from src import config, controllers, serializers
 
 sms_controller = controllers.SmsController()
 
-app = FastAPI(name='RPI sms receiver')
+app = FastAPI(title='RPI sms receiver')
 
 
 @app.get("/")
