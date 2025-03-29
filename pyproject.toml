@@ -13,5 +13,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "fabric>=3.2.2",
     "pytest>=8.3.5",
 ]
