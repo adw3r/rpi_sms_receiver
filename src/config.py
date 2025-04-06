@@ -1,4 +1,3 @@
-import logging
 import os
 import pathlib
 import sys
@@ -37,3 +36,5 @@ logger.add(
     retention="5 days",
 )
 logger.add(sys.stdout, format=LOGGING_FORMAT)
+
+PHONE_NUMBER = os.environ['PHONE_NUMBER']
