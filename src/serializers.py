@@ -77,18 +77,18 @@ def serialize_single_message(data: str):
         "message_body": message_body
     }
     """
+
     message: dict = {}
-    header, rest_of_message = data.split('\r\r\n')
-    message['id'] = header.replace('AT+CMGR=', '')
-
-    data = rest_of_message.replace('"', '').split(',', 4)
-    message['folder'] = data[0].replace('+CMGR: ', '')
-    message['sent_by'] = data[1]
-    message['received_at'] = data[-1].split('\r\n')[0]
-    encoded = data[-1].split('\r\n')[1]
-    message['raw_message'] = encoded
-
     try:
+        header, rest_of_message = data.split('\r\r\n')
+        message['id'] = header.replace('AT+CMGR=', '')
+
+        data = rest_of_message.replace('"', '').split(',', 4)
+        message['folder'] = data[0].replace('+CMGR: ', '')
+        message['sent_by'] = data[1]
+        message['received_at'] = data[-1].split('\r\n')[0]
+        encoded = data[-1].split('\r\n')[1]
+        message['raw_message'] = encoded
         byte_data = bytes.fromhex(encoded)
         decoded_text = byte_data.decode("utf-16BE")
         message['message_decoded'] = decoded_text
