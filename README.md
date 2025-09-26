@@ -1,6 +1,6 @@
 ### Полный гайд с настройкой модуля и ссылками где купить и тд.
-https://substantial-bobcat-e62.notion.site/Raspberry-sms-receiver-1bc792b9874f8069b86aec83446d2496
-
+[https://substantial-bobcat-e62.notion.site/Raspberry-sms-receiver-1bc792b9874f8069b86aec83446d2496
+](https://adw3r.notion.site/Raspberry-sms-receiver-1bc792b9874f8069b86aec83446d2496)
 
 
 Файл .env для настройки фастапи и сокета
